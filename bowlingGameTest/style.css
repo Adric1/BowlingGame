@@ -1,0 +1,22 @@
+
+
+table th
+{
+  text-align: left;
+  padding-right: 10px;
+  border: 1px solid #b9b9b9;
+}
+
+table td
+{
+  padding: 5px 10px;
+  border: 1px solid #b9b9b9;
+}
+.sec 
+{
+    border:1px solid black;
+}
+.total 
+{
+  border: 1px solid #005275;
+}
