@@ -68,38 +68,74 @@ function getid()
     var nodeRoll2 = document.querySelector('#tbl').querySelectorAll('#shot2');
     var nodeTotal = document.querySelector('#tbl').querySelectorAll('.total');
     
+    // for(i=0,j=0,k=0;i<nodeRoll1.length && j<nodeRoll2.length;i++,j++,k++)
+    // {
+    //     var pins = 10;
+        
+        
+    //     nodeRoll1[i].innerText = Math.floor(Math.random() * pins + 1);
+    //     // console.log("roll1: "+nodeRoll1[i].innerText);
+    //     var remainder = 10 - nodeRoll1[i].innerText;
+    //     nodeRoll2[j].innerText = Math.floor(Math.random() * remainder + 1);
+    //     if(nodeRoll1[i].innerText == 10)
+    //     {
+    //         nodeRoll2[j].innerText = 0;
+    //         continue;
+    //     }
+        
+    //     if(nodeRoll1[i-1] && nodeRoll1[i-1].innerText == 10)
+    //     {
+    //         console.log('strike on roll 1' +" ondex of i is: " +i);
+    //         // nodeRoll1[i].innerText = 5000;
+    //         nodeTotal[k-1].innerText = parseInt(nodeRoll1[i-1].innerText) + parseInt(nodeRoll1[i].innerText) + parseInt(nodeRoll2[j].innerText);
+    //     }
+    //     else if(nodeRoll1[i].innerText == 10 && nodeRoll1[i-1].innerText == 10)
+    //     {
+    //         // nodeTotal[k-1].innerText = parseInt(nodeRoll1[i].innerText) + parseInt(nodeRoll1[i-1].innerText);
+    //         continue;
+    //     }
+        
+    //     // console.log("roll2: "+nodeRoll2[j].innerText)
+    //     nodeTotal[k].innerText = parseInt(nodeRoll1[i].innerText) + parseInt(nodeRoll2[j].innerText);
+    //     // console.log("score: "+nodeTotal[k].innerText)
+    // }
+ 
     for(i=0,j=0,k=0;i<nodeRoll1.length && j<nodeRoll2.length;i++,j++,k++)
     {
         var pins = 10;
         
-        
         nodeRoll1[i].innerText = Math.floor(Math.random() * pins + 1);
-        if(nodeRoll1[i].innerText == 10)
-        {
-            continue;
-        }
-        
-        // console.log("roll1: "+nodeRoll1[i].innerText);
         var remainder = 10 - nodeRoll1[i].innerText;
         nodeRoll2[j].innerText = Math.floor(Math.random() * remainder + 1);
-        if(nodeRoll1[i-1] && nodeRoll1[i-1].innerText == 10)
-        {
-            console.log('strike on roll 1' +" ondex of i is: " +i);
-            // nodeRoll1[i].innerText = 5000;
-            nodeTotal[k-1].innerText = parseInt(nodeRoll1[i-1].innerText) + parseInt(nodeRoll1[i].innerText) + parseInt(nodeRoll2[j].innerText);
-        }
-        else if(nodeRoll1[i].innerText == 10 && nodeRoll1[i-1].innerText == 10)
-        {
-            // nodeTotal[k-1].innerText = parseInt(nodeRoll1[i].innerText) + parseInt(nodeRoll1[i-1].innerText);
-            continue;
-        }
         
-        // console.log("roll2: "+nodeRoll2[j].innerText)
-        nodeTotal[k].innerText = parseInt(nodeRoll1[i].innerText) + parseInt(nodeRoll2[j].innerText);
-        // console.log("score: "+nodeTotal[k].innerText)
-    }
- 
+        if(i<3)
+        nodeRoll1[i].innerText = 10;
 
+
+        if (nodeRoll1[i] && nodeRoll1[i].innerText == 10)
+            nodeRoll2[j].innerText = 0;
+
+        //one strike
+        if (nodeRoll1[i - 1] && nodeRoll1[i - 1].innerText == 10)
+        {
+            nodeTotal[k - 1].innerText = parseInt(nodeRoll1[i - 1].innerText) + parseInt(nodeRoll1[i].innerText) + parseInt(nodeRoll2[j].innerText);
+            nodeTotal[k].innerText = parseInt(nodeRoll1[i].innerText) + parseInt(nodeRoll2[j].innerText);
+        }
+
+        //two strikes
+        if ((nodeRoll1[i - 2] && nodeRoll1[i - 2].innerText == 10) && (nodeRoll1[i - 1].innerText == 10))
+        {
+            nodeTotal[k - 2].innerText = parseInt(nodeRoll1[i - 2].innerText) + parseInt(nodeRoll1[i - 1].innerText) + parseInt(nodeRoll1[i].innerText);
+        }
+       
+        //three stikes in a row
+        if (nodeRoll1[i - 2] && nodeRoll1[i - 2].innerText == 10 && nodeRoll1[i - 1].innerText == 10 && nodeRoll1[i].innerText == 10)
+        {
+            nodeTotal[k - 2].innerText = 30;
+        }
+
+        nodeTotal[k].innerText = parseInt(nodeRoll1[i].innerText) + parseInt(nodeRoll2[j].innerText);
+    }
 //##################################################################################################
 
 /**
